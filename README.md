@@ -23,10 +23,10 @@ To get started with the project, clone it from GitHub using the following comman
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/purchase-prediction-app.git
+git clone https://github.com/NoManNayeem/Customer-Purchase-Prediction.git
 
 # Navigate into the project directory
-cd purchase-prediction-app
+cd Customer-Purchase-Prediction
 ```
 
 ## 3. Create Venv and Run Locally
