@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Purchase Prediction App</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/styles.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="navbar-brand">Purchase Predictor</h1>
+            <ul class="navbar-nav">
+                <li><a href="/">Home</a></li>
+                <li><a href="/predict-view">Prediction Form</a></li>
+                <li><a href="/docs">API Docs</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    {% block content %}
+    <div class="container">
+        <div class="welcome">
+            <h1>Customer Purchase Prediction</h1>
+            <p>This application predicts whether a customer is likely to make a purchase based on their behavior and characteristics.</p>
+            
+            <div class="options">
+                <a href="/predict-view" class="btn btn-primary">Use Web Interface</a>
+                <a href="/docs" class="btn btn-secondary">API Documentation</a>
+            </div>
+            
+            <div class="api-example">
+                <h2>API Usage Example</h2>
+                <pre>
+POST /predict
+{
+  "age": 35,
+  "time_spent_on_site": 5.2,
+  "pages_visited": 8,
+  "previous_purchases": 2,
+  "cart_value": 75.5,
+  "is_returning_customer": 1,
+  "days_since_last_visit": 7
+}
+                </pre>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+
+    <script src="{{ url_for('static', path='/js/script.js') }}"></script>
+</body>
+</html>

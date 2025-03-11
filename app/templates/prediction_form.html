@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Customer Purchase Prediction</h1>
+    
+    {% if result %}
+    <div class="result {% if result.likely_to_purchase %}positive{% else %}negative{% endif %}">
+        <h2>Prediction Result</h2>
+        <p>Purchase probability: <strong>{{ "%.2f"|format(result.purchase_probability * 100) }}%</strong></p>
+        <p>Customer is <strong>{{ "likely" if result.likely_to_purchase else "not likely" }}</strong> to make a purchase.</p>
+    </div>
+    {% endif %}
+    
+    <form method="post">
+        <div class="form-group">
+            <label for="age">Customer Age:</label>
+            <input type="number" step="0.01" id="age" name="age" value="{{ form_data.age if form_data else '' }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="time_spent_on_site">Time Spent on Site (minutes):</label>
+            <input type="number" step="0.01" id="time_spent_on_site" name="time_spent_on_site" value="{{ form_data.time_spent_on_site if form_data else '' }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="pages_visited">Pages Visited:</label>
+            <input type="number" id="pages_visited" name="pages_visited" value="{{ form_data.pages_visited if form_data else '' }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="previous_purchases">Previous Purchases:</label>
+            <input type="number" id="previous_purchases" name="previous_purchases" value="{{ form_data.previous_purchases if form_data else '' }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="cart_value">Cart Value ($):</label>
+            <input type="number" step="0.01" id="cart_value" name="cart_value" value="{{ form_data.cart_value if form_data else '' }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="is_returning_customer">Returning Customer:</label>
+            <select id="is_returning_customer" name="is_returning_customer" required>
+                <option value="1" {% if form_data and form_data.is_returning_customer == 1 %}selected{% endif %}>Yes</option>
+                <option value="0" {% if form_data and form_data.is_returning_customer == 0 %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="days_since_last_visit">Days Since Last Visit:</label>
+            <input type="number" step="0.01" id="days_since_last_visit" name="days_since_last_visit" value="{{ form_data.days_since_last_visit if form_data else '' }}" required>
+        </div>
+        
+        <button type="submit">Predict Purchase</button>
+    </form>
+</div>
+{% endblock %}
